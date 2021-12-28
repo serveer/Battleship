@@ -1,0 +1,33 @@
+package callOfDuty;
+
+public class OilDrum extends Target {
+	static final String name="oilDrum";
+	public OilDrum(Base base) {
+		super(1, 1, base);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void explode() {
+		// set i,j to explode radius so we can add i to coordinate and shoot all surrounding target
+		for (int i=-2;i<=2;i++) {
+			for (int j=-2;j<=2;j++) {
+				//set base row and column to be shot, overwrite with each loop
+				int baseRow=getCoordinate()[0]+i;
+				int baseCol=getCoordinate()[1]+j;
+				//if base row and column within base area
+				if (baseRow<10 && baseRow>=0 && baseCol<10 && baseCol>=0) {
+					//act as if the coordinate is shot
+					getBase().shootAt(baseRow,baseCol);
+				}		
+			}
+		}
+	}
+
+	@Override
+	public String getTargetName() {
+		//return name of object
+		return name;
+	}
+
+}
